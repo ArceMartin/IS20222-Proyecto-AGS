@@ -1,0 +1,3 @@
+"Natural" is a general natural language facility for nodejs. 
+It offers a broad range of functionalities for natural language processing. 
+Documentation can be found here on Github Pages.
