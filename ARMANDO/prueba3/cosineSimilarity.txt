@@ -1,0 +1,10 @@
+What is cosine similarity?
+Cosine similarity measures the similarity of two vectors. 
+It measures the cosine of the angle between two vectors projected in a multi-dimensional space. 
+We can use this metric to determine how similar two documents are irrespective of their size.
+
+cos(a,b) = a . b / ||a|| ||b||
+
+Implementacion
+se codificara todas las funciones que se necesitan en JS, tambien se hara uso de HTML y algo de CSS.
+
