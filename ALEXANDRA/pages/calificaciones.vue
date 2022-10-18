@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'criterios',
+  name: 'calificaciones',
   data() {
     return {
       tareas: {

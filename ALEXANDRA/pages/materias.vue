@@ -26,6 +26,12 @@
                       </template>
                       <span>Establecer Criterios</span>
                       </v-tooltip>
+                      <v-tooltip top color="#FF57BF">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-icon color="#FF57BF" small class="mr-2" v-bind="attrs" v-on="on" @click="calificaciones(item)">mdi-book-edit</v-icon>
+                      </template>
+                      <span>Ver calificaciones</span>
+                      </v-tooltip>
                     </template>
                   </v-data-table>
 
@@ -100,6 +106,10 @@ export default {
     //Establecer criterios
     criterios(item){
       this.$router.push({name: "criterios"});
+    },
+    //Ver calificaciones 
+    calificaciones(){
+      this.$router.push({name: "calificaciones"});
     },
     //Función que cierra el cuadro de diálogo para agregar un item
     close() {
