@@ -39,23 +39,6 @@
           </v-card>
         </v-dialog>
 
-        <v-dialog v-model="dialog" max-width="500px">
-          <v-card>
-            <v-card-text>
-              <v-container>
-                <v-row>
-
-
-                </v-row>
-              </v-container>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="criterios();close();">Ok</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-
       </v-toolbar>
     </template>
 
@@ -75,6 +58,7 @@ export default {
   data: () => ({
     //Crea los datos asignados a la tabla creada con html
     dialog: false,
+    dialogB: false,
     headers: [
       { text: "Materia", value: "materia" },
       { text: "Tareas de la Materia", value: "actions", sortable: false },
@@ -115,7 +99,7 @@ export default {
     },
     //Establecer criterios
     criterios(item){
-
+      this.$router.push({name: "criterios"});
     },
     //Función que cierra el cuadro de diálogo para agregar un item
     close() {
