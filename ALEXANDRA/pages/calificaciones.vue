@@ -1,50 +1,84 @@
 <template>
-  <v-layout align-center justify-center>
-    <v-flex xs12 sm8 md7>
-      <br><br><br><br>
-      <v-card class="elevation-12">
-        <v-toolbar dark color="#FF57BF">
-          <v-toolbar-title>Establecer Criterios</v-toolbar-title>
-        </v-toolbar>
-        <v-card-text>
-          <v-sheet class="pa-5">
-            <v-switch v-model="switch1" inset :label="`Ortografía`"></v-switch>
-            <v-switch v-model="switch2" inset :label="`Extensión`" @click="extension()"></v-switch>
-          </v-sheet>
-          <v-text-field v-if="ext" label="Introduzca la extensión..." solo></v-text-field>
-          <v-textarea outlined name="input-7-4" label="Introduzca un texto de muestra..." ></v-textarea>
-          <center><v-btn color="#FF57BF" @click="regresar()">Aceptar</v-btn></center>
-        </v-card-text>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <v-data-table :headers="headers" :items="articulos">
+    <template v-slot:top>
+      <v-toolbar flat color="#C35F2D">
+        <v-toolbar-title>Calificaciones</v-toolbar-title>
+        <v-divider class="mx-4" inset vertical></v-divider>
+        <v-spacer></v-spacer>
+      </v-toolbar>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
 export default {
-  name: 'calificaciones',
-  data() {
-    return {
-      tareas: {
-        ref: undefined,
-        criterios:[],
-      },
-      switch1: false,
-      switch2: false,
-      ext: false,
+  data: () => ({
+    //Crea los datos asignados a la tabla creada con html
+    dialog: false,
+    dialogB: false,
+    headers: [
+      { text: "Alumno", value: "materia" },
+      { text: "Tarea", value: "actions", sortable: false },
+      { text: "Calificacion", value: "calif", sortable: false },
+    ],
+    articulos: [
+      { materia: "Diego", actions: "Tarea 1", calif: "100"},
+      { materia: "Andre", actions: "Tarea 1", calif: "90"},
+    ],
+    materias: [],
+    tareas: [],
+    editedIndex: -1,
+    editedItem: { materia: undefined },
+    deletedItem: {},
+    defaultItem: { materia: undefined },
+  }),
+  computed: {
+
+  },
+  watch: {
+    //Líneas que nos permiten cerrar las cuadros de diálogos
+    dialog(val) {
+      val || this.close();
     }
   },
+  created() {
+    //LLena las tablas con el contenido correspondiente
+    this.leerMaterias();
+    this.leerTareas();
+  },
   methods: {
-    regresar() {
-      this.$router.push({name: "materias"});
-    }, 
-    extension(){
-      if(this.ext ==true){
-        this.ext = false;
-      }else {
-        this.ext = true;
-      }
-    }
-  }
-}
+    //Obtiene la información de las tareas
+    verTareas() {
+      this.dialog = true;
+      this.tareas = [ {"tarea": "Tarea 1"}, {"tarea": "Tarea 2"} ];
+    },
+    //Obtiene la información de las tareas
+    leerMaterias(item) {
+      this.materias = [ {"materia": "Alumno 1"}, {"materia": "Alumno 2"} ];
+    },
+    leerTareas(item) {
+      this.tareas = [ {"tarea": "Tarea 1"}, {"tarea": "Tarea 2"} ];
+    },
+    //Establecer criterios
+    criterios(item){
+      this.$router.push({name: "criterios"});
+    },
+    //Ver calificaciones 
+    calificaciones(){
+      this.$router.push({name: "calificaciones"});
+    },
+    //Función que cierra el cuadro de diálogo para agregar un item
+    close() {
+      this.dialog = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
+    },
+    //Función que guarda la información sacada del cuadro de diálogo para agregar un item
+    save() {
+      
+    },
+  },
+};
 </script>
