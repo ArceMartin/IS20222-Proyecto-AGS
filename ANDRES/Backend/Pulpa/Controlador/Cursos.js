@@ -1,3 +1,9 @@
+//let Cursos = ["Algebra","Quimica","Español"];
+
+//async function mostrarCursos(req, res){
+    //res.send(Cursos);
+//}
+
 const fs = require('fs').promises;
 const path = require('path');
 const process = require('process');
@@ -10,7 +16,7 @@ const SCOPES = ['https://www.googleapis.com/auth/classroom.courses.readonly'];
 // created automatically when the authorization flow completes for the first
 // time.
 const TOKEN_PATH = path.join(process.cwd(), 'token.json');
-const CREDENTIALS_PATH = path.join(process.cwd(), './scr/JSON/credenciales.json');
+const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 /**
  * Reads previously authorized credentials from the save file.
@@ -85,5 +91,7 @@ async function listCourses(auth) {
     console.log(`${course.name} (${course.id})`);
   });
 }
-
+async function mostrarCursos(req, res) {
 authorize().then(listCourses).catch(console.error);
+}
+module.exports={mostrarCursos}
