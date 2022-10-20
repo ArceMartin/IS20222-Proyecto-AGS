@@ -22,15 +22,12 @@ export default {
     dialog: false,
     dialogB: false,
     headers: [
-      { text: "Alumno", value: "materia" },
+      { text: "Alumno", value: "alumno" },
       { text: "Calificación", value: "calif", sortable: false },
     ],
     articulos: [
-      { materia: "Diego", calif: "100"},
-      { materia: "Andre", calif: "90"},
+      this.$axios.get("https://localhost:3001/Alumnos").then((r) => { articulos = r.data; }).catch((err) => console.log(err.message)),
     ],
-    materias: [],
-    tareas: [],
     editedIndex: -1,
     editedItem: { materia: undefined },
     deletedItem: {},

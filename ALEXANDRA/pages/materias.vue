@@ -97,12 +97,16 @@ export default {
     //Obtiene la información de las tareas
     verTareas() {
       this.dialog = true;
-      this.tareas = [ {"tarea": "Tarea 1"}, {"tarea": "Tarea 2"} ];
+      this.tareas = [ 
+        this.$axios.get("https://localhost:3001/Tareas").then((r) => { this.tareas = r.data; }).catch((err) => console.log(err.message)),
+       ];
+      
     },
     //Obtiene la información de las tareas
     leerMaterias(item) {
-      this.materias = [ {"materia": "Materia 1"}, {"materia": "Materia 2"} ];
-      //this.$axios.get("https://localhost:3001/Cursos").then((r) => { this.materias = r.data; save(); }).catch((err) => console.log(err.message)),
+      this.materias = [ 
+        this.$axios.get("https://localhost:3001/Cursos").then((r) => { this.materias = r.data; }).catch((err) => console.log(err.message)),
+       ];
     },
     //Establecer criterios
     criterios(item){
