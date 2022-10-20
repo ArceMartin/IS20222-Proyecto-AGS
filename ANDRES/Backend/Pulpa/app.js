@@ -8,6 +8,9 @@ const Alumnos=require("./Rutas/Alumnos");
 const Cursos=require("./Rutas/Cursos");
 const Tareas=require("./Rutas/Tareas");
 app.use(express.json());
+const cors=require('cors');
+app.use(cors());
+app.use(express.json());
 
 //Declaracion de certificado
 const llavePrivada = fs.readFileSync("private.key");
