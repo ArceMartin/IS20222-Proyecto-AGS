@@ -1,7 +1,7 @@
 <template>
   <v-data-table :headers="headers" :items="materias">
     <template v-slot:top>
-      <v-toolbar flat color="#C35F2D">
+      <v-toolbar flat color="#039F70">
         <v-toolbar-title>Materias</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
@@ -49,9 +49,9 @@
     </template>
 
     <template v-slot:[`item.actions`]="{ item }">
-      <v-tooltip top color="#15AE92">
+      <v-tooltip top color="#23489F">
       <template v-slot:activator="{ on, attrs }">
-        <v-icon color="#00e69d" small class="mr-2" v-bind="attrs" v-on="on" @click="verTareas(item)">mdi-archive-arrow-up</v-icon>
+        <v-icon color="#23489F" small class="mr-2" v-bind="attrs" v-on="on" @click="verTareas(item)">mdi-archive-arrow-up</v-icon>
       </template>
       <span>Ver Tareas</span>
       </v-tooltip>
@@ -71,7 +71,7 @@ export default {
     ],
     headers2: [
       { text: "Tareas", value: "tarea" },
-      { text: "Criterios", value: "actions", sortable: false },
+      { text: "Acciones", value: "actions", sortable: false },
     ],
     materias: [],
     tareas: [],
@@ -102,6 +102,7 @@ export default {
     //Obtiene la información de las tareas
     leerMaterias(item) {
       this.materias = [ {"materia": "Materia 1"}, {"materia": "Materia 2"} ];
+      //this.$axios.get("https://localhost:3001/Cursos").then((r) => { this.materias = r.data; save(); }).catch((err) => console.log(err.message)),
     },
     //Establecer criterios
     criterios(item){
@@ -118,10 +119,6 @@ export default {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       });
-    },
-    //Función que guarda la información sacada del cuadro de diálogo para agregar un item
-    save() {
-      
     },
   },
 };

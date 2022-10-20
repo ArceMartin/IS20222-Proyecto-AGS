@@ -2,7 +2,7 @@
   <v-card>
   <v-data-table :headers="headers" :items="articulos">
     <template v-slot:top>
-      <v-toolbar flat color="#C35F2D">
+      <v-toolbar flat color="#CD0839">
         <v-toolbar-title>Calificaciones</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
@@ -10,7 +10,7 @@
     </template>
   </v-data-table>
     <v-card-text>
-      <center><v-btn color="#FF57BF" @click="regresar()">Aceptar</v-btn></center>
+      <center><v-btn color="#CD0839" @click="regresar()">Aceptar</v-btn></center>
     </v-card-text>
   </v-card>
 </template>
@@ -23,7 +23,7 @@ export default {
     dialogB: false,
     headers: [
       { text: "Alumno", value: "materia" },
-      { text: "Calificacion", value: "calif", sortable: false },
+      { text: "Calificación", value: "calif", sortable: false },
     ],
     articulos: [
       { materia: "Diego", calif: "100"},
