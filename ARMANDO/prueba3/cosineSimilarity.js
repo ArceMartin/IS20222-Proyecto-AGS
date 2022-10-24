@@ -1,3 +1,23 @@
+const pdfjs = require("pdfjs-dist/es5/build/pdf");
+
+async function getContent(src)
+{
+    const doc = await pdfjs.getDocument(src).promise
+    const pagina = await doc.getPage(1)
+    return await pagina.getTextContent()
+}
+
+async function getItems(src)
+{
+    const content = await getContent(src)
+    const items = content.items.map((item)=>{
+        console.log(item.str)
+    })
+    return items
+}
+getItems("./Capitulo2.pdf")
+
+
 //primero mapeamos las palabras en un texto a su contador de frecuencia.
 //para hacerlo solamente separamos el texto en palabras e iterar a traves de cada palabra
 //y contar cuantas veces la palabra aparece en el texto.
@@ -80,5 +100,5 @@ function obtenerValorSimilitud(val){
 }
 //esta funcion es solo para redondear los resultados y cambiarlos a porcentajes, para hacerlo mas entendible.
 
-
+//textCosineSimilarity("hola es igual", "hola no es igual")
 //module.exports = new textCosineSimilarity
