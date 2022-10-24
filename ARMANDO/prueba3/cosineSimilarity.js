@@ -81,4 +81,4 @@ function obtenerValorSimilitud(val){
 //esta funcion es solo para redondear los resultados y cambiarlos a porcentajes, para hacerlo mas entendible.
 
 
-
+//module.exports = new textCosineSimilarity
