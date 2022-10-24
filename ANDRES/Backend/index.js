@@ -1,3 +1,9 @@
+const express=require("express");
+const app=express();
+app.use(express.json());
+
+
+
 const fs = require('fs').promises;
 const path = require('path');
 const process = require('process');
@@ -5,7 +11,16 @@ const {authenticate} = require('@google-cloud/local-auth');
 const {google} = require('googleapis');
 
 // If modifying these scopes, delete token.json.
-const SCOPES = ['https://www.googleapis.com/auth/classroom.courses.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/classroom.courses.readonly',
+'https://www.googleapis.com/auth/classroom.courses',
+'https://www.googleapis.com/auth/classroom.rosters',
+'https://www.googleapis.com/auth/classroom.rosters.readonly',
+'https://www.googleapis.com/auth/classroom.profile.emails',
+'https://www.googleapis.com/auth/classroom.profile.photos',
+'https://www.googleapis.com/auth/classroom.coursework.students.readonly',
+'https://www.googleapis.com/auth/classroom.coursework.me.readonly',
+'https://www.googleapis.com/auth/classroom.coursework.students',
+'https://www.googleapis.com/auth/classroom.coursework.me'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
@@ -43,7 +58,7 @@ async function saveCredentials(client) {
     client_secret: key.client_secret,
     refresh_token: client.credentials.refresh_token,
   });
-  await fs.writeFile(TOKEN_PATH, payload);
+  //await fs.writeFile(TOKEN_PATH, payload);
 }
 
 /**
@@ -82,8 +97,60 @@ async function listCourses(auth) {
   }
   console.log('Courses:');
   courses.forEach((course) => {
-    console.log(`${course.name} (${course.id})`);
+  console.log(`${course.name} (${course.id})`);
+  
+    
   });
 }
+var list=[];
+async function cursos(auth) {
+  const classroom = google.classroom({version: 'v1', auth});
+  const curso = await classroom.courses.list({
+    courseStates: 'ACTIVE'
+  });
+  const lista = curso.data.courses;
+  list=lista;
+  
+  //res.send(list);
+  console.log(curso.data);
+  
+}
 
-authorize().then(listCourses).catch(console.error);
+async function alumnos(auth) {
+  const classroom = google.classroom({version: 'v1', auth});
+  const curso = await classroom.courses.students.list({
+    courseId: '552369791770'
+  });
+  const lista = curso.data.students;
+  list=lista;
+  console.log(curso.data);
+  
+}
+
+async function trabajos(auth) {
+  const classroom = google.classroom({version: 'v1', auth});
+  const curso = await classroom.courses.courseWork.list({
+    courseId: '552369791770'
+  });
+  const lista = curso.data.courseWork;
+  list=lista;
+  console.log(curso.data);
+  
+}
+
+
+//authorize().then(listCourses).catch(console.error);
+
+const port=3000;
+//Mensaje principal del servidor
+app.get("/", (req, res) => {
+    //authorize().then(listCourses).catch(console.error);
+    authorize().then(alumnos).then(r=>{res.send(list)}).catch(console.error);
+    
+});
+
+app.listen(port, ()=>{
+  console.log("Server esuchando el puerto ",port)
+}).on("Error",(err)=>{
+  console.log("Error: ",err);
+});
