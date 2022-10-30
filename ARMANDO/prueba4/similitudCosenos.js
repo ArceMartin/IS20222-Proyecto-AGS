@@ -5,13 +5,15 @@ function wordCount(str)
 {
     let palabras = str.split(' ');
     let contadorPalabras = {};
-    palabras.array.forEach(w => {
+    palabras.forEach((w)=>{
         contadorPalabras[w] = (contadorPalabras[w] || 0) +1;
     });
 return contadorPalabras;
 }
+
 let a=wordCount("hola");
-console.log(a);
+console.log(a)
+
 //al final retorna un objeto con el mapeon entre una palabra y su frecuencia
 
 //Posteriormente necesitamos crear un diccionario de todas las palabras que estan presentes en ambos textos que revisamos para similitud.
@@ -72,12 +74,16 @@ function textCosineSimilarity(txtA, txtB)
     agregarPalabrasADiccionario(contadorPalabrasA,dict);
     agregarPalabrasADiccionario(contadorPalabrasB, dict);
     const vectorA = mapPalabrasAVector(contadorPalabrasA,dict);
-    const vectorB = mapPalabrasAVector(vectorA, vectorB);
+    const vectorB = mapPalabrasAVector(contadorPalabrasB,dict);
     return cosineSimilarity(vectorA, vectorB);
 }
+let b=textCosineSimilarity("Este es un ejemplo de que tan similares son dos textos","Este es un ejemplo de que no tan similares son dos textos");
+console.log(b);
 
 function obtenerValorSimilitud(val){
     return Math.round(val * 100)
 }
 //esta funcion es solo para redondear los resultados y cambiarlos a porcentajes, para hacerlo mas entendible.
 
+let c = obtenerValorSimilitud(b);
+console.log(c)
