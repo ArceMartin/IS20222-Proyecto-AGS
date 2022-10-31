@@ -1,7 +1,3 @@
-const express=require("express");
-const app=express();
-app.use(express.json());
-
 
 
 const fs = require('fs').promises;
@@ -85,30 +81,15 @@ async function authorize() {
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-async function listCourses(auth) {
-  const classroom = google.classroom({version: 'v1', auth});
-  const res = await classroom.courses.list({
-    pageSize: 10,
-  });
-  const courses = res.data.courses;
-  if (!courses || courses.length === 0) {
-    console.log('No courses found.');
-    return;
-  }
-  console.log('Courses:');
-  courses.forEach((course) => {
-  console.log(`${course.name} (${course.id})`);
-  
-    
-  });
-}
+
 var list=[];
-async function cursos(auth) {
+async function ListaEntregas(auth) {
   const classroom = google.classroom({version: 'v1', auth});
-  const curso = await classroom.courses.list({
-    courseStates: 'ACTIVE'
+  const curso = await classroom.courses.courseWork.studentSubmissions.list({
+    courseId:"552369791770",
+    courseWorkId:"502630900384"
   });
-  const lista = curso.data.courses;
+  const lista = curso.data;
   list=lista;
   
   //res.send(list);
@@ -116,41 +97,20 @@ async function cursos(auth) {
   
 }
 
-async function alumnos(auth) {
-  const classroom = google.classroom({version: 'v1', auth});
-  const curso = await classroom.courses.students.list({
-    courseId: '552369791770'
-  });
-  const lista = curso.data.students;
-  list=lista;
-  console.log(curso.data);
-  
-}
 
-async function trabajos(auth) {
-  const classroom = google.classroom({version: 'v1', auth});
-  const curso = await classroom.courses.courseWork.list({
-    courseId: '552369791770'
-  });
-  const lista = curso.data.courseWork;
-  list=lista;
-  console.log(curso.data);
-  
-}
+
 
 
 //authorize().then(listCourses).catch(console.error);
 
-const port=3000;
-//Mensaje principal del servidor
-app.get("/", (req, res) => {
-    //authorize().then(listCourses).catch(console.error);
-    authorize().then(trabajos).then(r=>{res.send(list)}).catch(console.error);
-    
-});
 
-app.listen(port, ()=>{
-  console.log("Server esuchando el puerto ",port)
-}).on("Error",(err)=>{
-  console.log("Error: ",err);
-});
+//Mensaje principal del servidor
+async function mostrarEntregas(req, res){
+    //authorize().then(listCourses).catch(console.error);
+    authorize().then(ListaEntregas).then(r=>{res.send(list)}).catch(console.error);
+    
+};
+
+
+
+module.exports={mostrarEntregas}
