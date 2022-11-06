@@ -65,6 +65,17 @@ function cosineSimilarity(vecA,vecB){
 }
 
 //Ahora que ya tenemos todo lo que necesitamos agregamos una funcion para tomar 2 cadenas en vez de 2 vectores
+const diccionario=[
+    {palabra:'Feliz',sinonimos:['Alegre', 'contento','venturoso','satisfecho']}
+];
+
+for (p in txtB)
+{
+    if (p in diccionario)
+    {
+        p=diccionario[p];
+    }
+}
 
 function textCosineSimilarity(txtA, txtB)
 {
