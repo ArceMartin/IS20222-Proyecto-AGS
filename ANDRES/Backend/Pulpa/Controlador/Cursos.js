@@ -92,6 +92,15 @@ async function authorize() {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 
+
+ class Curso {
+  constructor(nombre,clave) {
+      this.nombre = nombre;
+      this.clave=clave;
+
+  }
+}
+ var datos=[];
 var list=[];
 async function cursos(auth) {
   const classroom = google.classroom({version: 'v1', auth});
@@ -100,11 +109,16 @@ async function cursos(auth) {
   });
   const lista = curso.data.courses;
   list=lista;
-  
+
+  for(i=0;i<list.length;i++){
+    datos.push(new Curso(list[i].name,list[i].id));
+  }
   //res.send(list);
   //console.log(curso.data);
   
 }
+
+
 
 
 
@@ -116,10 +130,11 @@ async function cursos(auth) {
 //Mensaje principal del servidor
 async function mostrarCursos(req, res){
     //authorize().then(listCourses).catch(console.error);
-    authorize().then(cursos).then(r=>{res.send(list)}).catch(console.error);
-    
+    authorize().then(cursos).then(r=>{res.send(datos)}).catch(console.error);
 };
 
 
 
 module.exports={mostrarCursos}
+
+

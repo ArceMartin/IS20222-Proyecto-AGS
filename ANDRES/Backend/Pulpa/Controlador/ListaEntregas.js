@@ -81,7 +81,14 @@ async function authorize() {
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
+ class Entrega {
+  constructor(claveAlumno,claveEntrega) {
+      this.claveAlumno = claveAlumno;
+      this.claveEntrega=claveEntrega;
 
+  }
+}
+ var datos=[];
 var list=[];
 async function ListaEntregas(auth) {
   const classroom = google.classroom({version: 'v1', auth});
@@ -89,11 +96,13 @@ async function ListaEntregas(auth) {
     courseId:"552369791770",
     courseWorkId:"502630900384"
   });
-  const lista = curso.data;
+  const lista = curso.data.studentSubmissions;
   list=lista;
-  
+  for(i=0;i<list.length;i++){
+    datos.push(new Entrega(list[i].userId,list[i].id));
+  }
   //res.send(list);
-  console.log(curso.data);
+  //console.log(curso.data);
   
 }
 
@@ -107,7 +116,7 @@ async function ListaEntregas(auth) {
 //Mensaje principal del servidor
 async function mostrarEntregas(req, res){
     //authorize().then(listCourses).catch(console.error);
-    authorize().then(ListaEntregas).then(r=>{res.send(list)}).catch(console.error);
+    authorize().then(ListaEntregas).then(r=>{res.send(datos)}).catch(console.error);
     
 };
 
