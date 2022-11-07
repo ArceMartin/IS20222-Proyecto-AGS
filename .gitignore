@@ -1,5 +1,10 @@
 .DS_Store
 node_modules/
+ALEXANDRA/node_modules/
+ANDRES/node_modules/
+ANDRES/node_modules/
+DIEGO/node_modules/
+MARTIN/node_modules/
 /dist/
 
 # local env files
