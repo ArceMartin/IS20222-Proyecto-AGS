@@ -95,7 +95,14 @@ async function authorize() {
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
+ class Tarea {
+  constructor(titulo,clave) {
+      this.titulo = titulo;
+      this.clave=clave;
 
+  }
+}
+ var datos=[];
 var list=[];
 
 async function trabajos(auth) {
@@ -105,6 +112,9 @@ async function trabajos(auth) {
   });
   const lista = curso.data.courseWork;
   list=lista;
+  for(i=0;i<list.length;i++){
+    datos.push(new Tarea(list[i].title,list[i].id));
+  }
   //console.log(curso.data);
   
 }
@@ -116,7 +126,7 @@ async function trabajos(auth) {
 //Mensaje principal del servidor
 async function mostrarTareas(req, res){
     //authorize().then(listCourses).catch(console.error);
-    authorize().then(trabajos).then(r=>{res.send(list)}).catch(console.error);
+    authorize().then(trabajos).then(r=>{res.send(datos)}).catch(console.error);
     
 };
 

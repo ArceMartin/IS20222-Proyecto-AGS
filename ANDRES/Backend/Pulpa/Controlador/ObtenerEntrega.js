@@ -81,18 +81,27 @@ async function authorize() {
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
+ class Entrega {
+  constructor(nombre,clave) {
+      this.nombre = nombre;
+      this.clave=clave;
 
+  }
+}
+ var datos=[];
 var list=[];
 async function regresarEntregas(auth) {
   const classroom = google.classroom({version: 'v1', auth});
   const curso = await classroom.courses.courseWork.studentSubmissions.get({
     courseId:"552369791770",
     courseWorkId:"502630900384",
-    id: "Cg0IkL3BmCsQoMWLudAO"
+    id: "Cg4I2IqTpMIBEKDFi7nQDg"
   });
   const lista = curso.data;
   list=lista;
-  
+  for(i=0;i<list.length;i++){
+    datos.push(new Entrega(list[i].userId,list[i].id));
+  }
   //res.send(list);
   //console.log(curso.data);
   

@@ -101,19 +101,6 @@ async function authorize() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //Declaracion de certificado
 const llavePrivada = fs.readFileSync("private.key");
 const certificado = fs.readFileSync("certificate.crt");

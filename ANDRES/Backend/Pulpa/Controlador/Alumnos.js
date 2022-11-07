@@ -93,7 +93,14 @@ async function authorize() {
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
+ class Alumno {
+  constructor(nombre,clave) {
+      this.nombre = nombre;
+      this.clave=clave;
 
+  }
+}
+ var datos=[];
 var list=[];
 
 
@@ -104,6 +111,9 @@ async function alumnos(auth) {
   });
   const lista = curso.data.students;
   list=lista;
+  for(i=0;i<list.length;i++){
+    datos.push(new Alumno(list[i].profile.name.fullName,list[i].userId));
+  }
   //console.log(curso.data);
   
 }
@@ -116,7 +126,7 @@ async function alumnos(auth) {
 //Mensaje principal del servidor
 async function mostrarAlumnos(req, res){
     //authorize().then(listCourses).catch(console.error);
-    authorize().then(alumnos).then(r=>{res.send(list)}).catch(console.error);
+    authorize().then(alumnos).then(r=>{res.send(datos)}).catch(console.error);
     
 };
 

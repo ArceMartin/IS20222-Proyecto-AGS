@@ -4,7 +4,8 @@
   "description": "Backend controlador de rutas y comunicacion con la API de google classroom",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./Pulpa/app.js"
+    "dev": "nodemon ./Pulpa/app.js",
+    "test": ""
   },
   "author": "Andres Rodriguez",
   "license": "ISC",
@@ -16,5 +17,10 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "googleapis": "^95.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.1.0"
   }
 }
