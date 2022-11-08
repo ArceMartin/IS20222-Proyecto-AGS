@@ -51,7 +51,15 @@
     <template v-slot:[`item.actions`]="{ item }">
       <v-tooltip top color="#23489F">
       <template v-slot:activator="{ on, attrs }">
-        <v-icon color="#23489F" small class="mr-2" v-bind="attrs" v-on="on" @click="verTareas(item)">mdi-archive-arrow-up</v-icon>
+        <v-icon 
+          color="#23489F" 
+          small 
+          class="mr-2" 
+          v-bind="attrs" 
+          v-on="on" 
+          @click="verTareas(item)">
+          mdi-archive-arrow-up
+        </v-icon>
       </template>
       <span>Ver Tareas</span>
       </v-tooltip>
@@ -70,10 +78,11 @@ export default {
       { text: "Tareas de la Materia", value: "actions", sortable: false },
     ],
     headers2: [
-      { text: "Tareas", value: "nombre" },
+      { text: "Tareas", value: "titulo" },
       { text: "Acciones", value: "actions", sortable: false },
     ],
     materias: [],
+    materiaschafas: [],
     tareas: [],
     editedIndex: -1,
     editedItem: { materia: undefined },
