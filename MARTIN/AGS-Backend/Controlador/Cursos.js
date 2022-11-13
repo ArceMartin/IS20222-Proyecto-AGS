@@ -109,7 +109,10 @@ async function cursos(auth) {
   });
   const lista = curso.data.courses;
   list=lista;
-
+  while(datos.length>0)
+  {
+    datos.pop();
+  }
   for(i=0;i<list.length;i++){
     datos.push(new Curso(list[i].name,list[i].id));
   }
