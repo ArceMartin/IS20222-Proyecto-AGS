@@ -3,7 +3,7 @@ const router=express.Router();
 const Alumnos=require("../Controlador/Alumnos");
 //Llamadas de las rutas correspondientes
 
-router.get("/",Alumnos.mostrarAlumnos);
+router.get("/:Grupo",Alumnos.mostrarAlumnos);
 
 
 

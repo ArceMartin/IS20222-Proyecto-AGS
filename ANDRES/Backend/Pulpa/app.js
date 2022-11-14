@@ -113,7 +113,19 @@ const credenciales = {
 const httpsServer = https.createServer(credenciales, app);
 
 //Mensaje principal del servidor
-app.get("/", (req, res) => {
+    app.get("/", (req, res) => {
+      if(fs.existsSync("./token.json")){
+      try {
+        fs.unlinkSync('./token.json')
+      } catch(err) {
+        console.error('Error al borrar el archivo token', err)
+      }
+    }
+
+
+
+
+
     res.send("Bienvenido al servicio web");
     authorize();
 });

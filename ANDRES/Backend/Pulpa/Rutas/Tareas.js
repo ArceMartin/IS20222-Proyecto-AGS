@@ -3,7 +3,7 @@ const router=express.Router();
 const Tareas=require("../Controlador/Tareas");
 //Llamadas de las rutas correspondientes
 
-router.get("/",Tareas.mostrarTareas);
+router.get("/:Grupo",Tareas.mostrarTareas);
 
 
 

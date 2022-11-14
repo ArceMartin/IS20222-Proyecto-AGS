@@ -90,18 +90,22 @@ async function authorize() {
 }
  var datos=[];
 var list=[];
+var grupo;
+var actividad;
+var entrega;
+
 async function regresarEntregas(auth) {
   const classroom = google.classroom({version: 'v1', auth});
   const curso = await classroom.courses.courseWork.studentSubmissions.get({
-    courseId:"552369791770",
-    courseWorkId:"502630900384",
-    id: "Cg4I2IqTpMIBEKDFi7nQDg"
+    courseId:grupo,
+    courseWorkId:actividad,
+    id: entrega
   });
   const lista = curso.data;
   list=lista;
-  for(i=0;i<list.length;i++){
-    datos.push(new Entrega(list[i].userId,list[i].id));
-  }
+  //for(i=0;i<list.length;i++){
+    //datos.push(new Entrega(list[i].userId,list[i].id));
+  //}
   //res.send(list);
   //console.log(curso.data);
   
@@ -117,7 +121,7 @@ async function regresarEntregas(auth) {
 //Mensaje principal del servidor
 async function obtenerEntrega(req, res){
     //authorize().then(listCourses).catch(console.error);
-    authorize().then(regresarEntregas).then(r=>{res.send(list)}).catch(console.error);
+    authorize().then(grupo=req.params.Grupo).then(actividad=req.params.Actividad).then(entrega=req.params.CEntrega).then(regresarEntregas).then(r=>{res.send(list)}).catch(console.error);
     
 };
 

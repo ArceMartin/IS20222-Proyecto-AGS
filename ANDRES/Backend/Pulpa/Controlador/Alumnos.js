@@ -102,12 +102,12 @@ async function authorize() {
 }
  var datos=[];
 var list=[];
-
+var grupo;
 
 async function alumnos(auth) {
   const classroom = google.classroom({version: 'v1', auth});
   const curso = await classroom.courses.students.list({
-    courseId: '552369791770'
+    courseId: grupo
   });
   const lista = curso.data.students;
   list=lista;
@@ -126,7 +126,7 @@ async function alumnos(auth) {
 //Mensaje principal del servidor
 async function mostrarAlumnos(req, res){
     //authorize().then(listCourses).catch(console.error);
-    authorize().then(alumnos).then(r=>{res.send(datos)}).catch(console.error);
+    authorize().then(grupo=req.params.Grupo).then(alumnos).then(r=>{res.send(datos)}).catch(console.error);
     
 };
 

@@ -90,11 +90,14 @@ async function authorize() {
 }
  var datos=[];
 var list=[];
+var grupo;
+var actividad;
 async function ListaEntregas(auth) {
   const classroom = google.classroom({version: 'v1', auth});
   const curso = await classroom.courses.courseWork.studentSubmissions.list({
-    courseId:"552369791770",
-    courseWorkId:"502630900384"
+    courseId:grupo,
+    courseWorkId:actividad,
+    states:"TURNED_IN"
   });
   const lista = curso.data.studentSubmissions;
   list=lista;
@@ -116,7 +119,7 @@ async function ListaEntregas(auth) {
 //Mensaje principal del servidor
 async function mostrarEntregas(req, res){
     //authorize().then(listCourses).catch(console.error);
-    authorize().then(ListaEntregas).then(r=>{res.send(datos)}).catch(console.error);
+    authorize().then(grupo=req.params.Grupo).then(actividad=req.params.Actividad).then(ListaEntregas).then(r=>{res.send(datos)}).catch(console.error);
     
 };
 
