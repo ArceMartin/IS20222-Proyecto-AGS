@@ -26,3 +26,9 @@ describe('textCosineSimilarity',()=>{
     })
 })
 
+
+describe('diceCoefficient',()=>{
+    it('Debe retornar un valor decimal entre 0 y 1', ()=>{
+        assert.isAbove(diceCoefficient('Un circulo es una figura de forma redonda', "Un circulo es una figura esferica"),(0.6))
+    })
+})
